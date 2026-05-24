@@ -61,9 +61,12 @@ body::after{content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;o
 ═══════════════════════════════════════════════════ */
 .glow-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 55% 45% at 15% 8%,rgba(124,109,250,.12) 0%,transparent 65%),
-    radial-gradient(ellipse 45% 35% at 85% 85%,rgba(52,211,153,.08) 0%,transparent 65%),
-    radial-gradient(ellipse 35% 30% at 75% 15%,rgba(244,114,182,.06) 0%,transparent 60%)}
+    radial-gradient(ellipse 80% 60% at 10% 0%,rgba(124,109,250,.13) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%,rgba(52,211,153,.09) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 10%,rgba(244,114,182,.07) 0%,transparent 55%),
+    radial-gradient(ellipse 100% 100% at 50% 50%,rgba(13,13,30,1) 30%,transparent 100%),
+    var(--bg);
+}
 
 /* ═══════════════════════════════════════════════════
    NAV
@@ -191,6 +194,7 @@ nav.scrolled{padding:14px 64px}
   padding:80px 48px;gap:24px;
 }
 .hero-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hero-stats-grid .h-stat:last-child{grid-column:1/-1}
 .h-stat{
   padding:20px 18px;background:var(--card);border:1px solid var(--border);
   border-radius:10px;transition:all .3s;
@@ -308,6 +312,61 @@ nav.scrolled{padding:14px 64px}
 .proj-btn-repo:hover{border-color:var(--v1);color:var(--v1)}
 
 
+
+/* ═══════════════════════════════════════════════════
+   CNN COMPARISON VISUAL
+═══════════════════════════════════════════════════ */
+.cnn-comparison{
+  display:flex;width:100%;height:100%;align-items:stretch;
+}
+.cnn-pane{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:18px 14px;position:relative;
+}
+.cnn-pane.normal{background:linear-gradient(160deg,rgba(52,211,153,.1) 0%,rgba(52,211,153,.03) 100%)}
+.cnn-pane.pneumonia{background:linear-gradient(160deg,rgba(244,114,182,.1) 0%,rgba(244,114,182,.03) 100%)}
+.cnn-xray{
+  width:72px;height:72px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+}
+.normal-xray{
+  background:radial-gradient(ellipse at center,rgba(52,211,153,.25) 0%,rgba(52,211,153,.06) 60%,transparent 100%);
+  box-shadow:0 0 18px rgba(52,211,153,.2);
+}
+.pneumo-xray{
+  background:radial-gradient(ellipse at center,rgba(244,114,182,.25) 0%,rgba(244,114,182,.08) 60%,transparent 100%);
+  box-shadow:0 0 18px rgba(244,114,182,.2);
+}
+.cnn-scan-line{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(52,211,153,.8),transparent);
+  animation:scan 2.4s ease-in-out infinite;
+}
+.cnn-scan-line.red{
+  background:linear-gradient(90deg,transparent,rgba(244,114,182,.8),transparent);
+  animation-delay:.8s;
+}
+@keyframes scan{
+  0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}
+}
+.cnn-label{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.cnn-label.green{color:var(--t1)}
+.cnn-label.red{color:var(--p1)}
+.cnn-conf{font-size:10px;color:var(--muted);letter-spacing:.04em}
+.cnn-bar{
+  width:100%;height:5px;border-radius:3px;
+  background:rgba(255,255,255,.07);overflow:hidden;
+}
+.cnn-bar-fill{
+  height:100%;border-radius:3px;width:var(--w,0%);
+  animation:barGrow 1.2s ease forwards;
+}
+@keyframes barGrow{from{width:0}to{width:var(--w,0%)}}
 
 /* ═══════════════════════════════════════════════════
    SKILLS
@@ -528,14 +587,13 @@ footer{
     </h1>
 
     <p class="hero-desc reveal d3">
-      <strong>AI & ML undergraduate</strong> building intelligent systems end-to-end — CNNs that detect pneumonia, multilingual Quranic AI companions, civic chatbots, and data dashboards that matter. CGPA 3.65 | Last Sem 3.87.
+      <strong>AI & ML undergraduate</strong> building intelligent systems end-to-end — CNNs that detect pneumonia, multilingual Quranic AI companions, civic chatbots, and data dashboards that matter. CGPA 3.65 · Last Sem <strong>3.87</strong>.
     </p>
 
     <div class="hero-actions reveal d4">
       <a href="#projects" class="btn-glow">⚡ View Projects</a>
       <a href="#contact" class="btn-outline">✉ Contact Me</a>
-      <a href="Maryam_Sohail_Ahmed_CV.pdf" download>↓ Download CV</a>
-
+      <a href="Maryam_Sohail_Ahmed_CV.pdf" download class="btn-resume">↓ Download CV</a>
     </div>
 
     <div class="hero-socials reveal d5">
@@ -550,6 +608,10 @@ footer{
       <div class="h-stat">
         <div class="h-stat-num" id="s1">0</div>
         <div class="h-stat-label">CGPA</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num" id="s5">0</div>
+        <div class="h-stat-label">Last Sem GPA</div>
       </div>
       <div class="h-stat">
         <div class="h-stat-num" id="s2">0<sup>+</sup></div>
@@ -805,6 +867,73 @@ footer{
           <a href="https://github.com/maryamsohail32/pakistan-socioeconmic-dashboard" target="_blank" class="proj-btn proj-btn-repo">🐙 GitHub Repo</a>
           
 
+        </div>
+      </div>
+    </div>
+
+    <!-- TeamTasks -->
+    <div class="proj-card reveal d4">
+      <div class="proj-visual" style="background:linear-gradient(135deg,rgba(244,114,182,.1),rgba(124,109,250,.08));flex-direction:column;gap:0;padding:0;overflow:hidden">
+        <!-- Kanban mini board -->
+        <div style="width:100%;height:100%;display:flex;flex-direction:column;padding:14px 14px 10px">
+          <div style="font-size:9px;color:var(--p1);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;font-weight:600">KANBAN BOARD</div>
+          <div style="display:flex;gap:7px;flex:1">
+            <!-- To Do -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:5px">
+              <div style="font-size:8px;color:var(--dim);letter-spacing:.1em;margin-bottom:2px">TO DO</div>
+              <div style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:5px;padding:5px 7px">
+                <div style="font-size:8px;color:var(--muted)">Design API</div>
+                <div style="font-size:7px;color:var(--dim);margin-top:2px;display:flex;gap:4px">
+                  <span style="background:rgba(251,191,36,.15);border-radius:3px;padding:1px 4px;color:var(--gold)">High</span>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:5px;padding:5px 7px">
+                <div style="font-size:8px;color:var(--muted)">Write tests</div>
+              </div>
+            </div>
+            <!-- In Progress -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:5px">
+              <div style="font-size:8px;color:var(--dim);letter-spacing:.1em;margin-bottom:2px">IN PROGRESS</div>
+              <div style="background:rgba(124,109,250,.1);border:1px solid rgba(124,109,250,.25);border-radius:5px;padding:5px 7px">
+                <div style="font-size:8px;color:var(--v2)">Auth flow</div>
+                <div style="font-size:7px;color:var(--dim);margin-top:2px">
+                  <span style="background:rgba(124,109,250,.2);border-radius:3px;padding:1px 4px;color:var(--v2)">Med</span>
+                </div>
+              </div>
+            </div>
+            <!-- Done -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:5px">
+              <div style="font-size:8px;color:var(--dim);letter-spacing:.1em;margin-bottom:2px">DONE</div>
+              <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:5px;padding:5px 7px">
+                <div style="font-size:8px;color:var(--t1)">✓ DB schema</div>
+              </div>
+              <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:5px;padding:5px 7px">
+                <div style="font-size:8px;color:var(--t1)">✓ Team invite</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;align-items:center">
+            <div style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--v1),var(--p1));display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">M</div>
+            <div style="font-size:9px;color:var(--dim)">Role: <span style="color:var(--v2)">owner</span></div>
+            <div style="margin-left:auto;font-size:9px;color:var(--t1)">Laravel 11</div>
+          </div>
+        </div>
+        <span class="proj-visual-label">Deployed</span>
+      </div>
+      <div class="proj-body-wrap">
+        <span class="proj-tag">Full-Stack · Laravel · Team Collaboration</span>
+        <h3 class="proj-title">TeamTasks</h3>
+        <p class="proj-desc">Collaborative task manager built with Laravel 11. Teams can be created, members invited by email, and tasks tracked across a Kanban board with role-based access, priority flags, and overdue highlighting.</p>
+        <div class="proj-chips">
+          <span class="proj-chip pink">Laravel 11</span>
+          <span class="proj-chip">PHP 8.3</span>
+          <span class="proj-chip teal">Tailwind CSS</span>
+          <span class="proj-chip">MySQL</span>
+          <span class="proj-chip">Blade</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/maryamsohail32/TeamTasks" target="_blank" class="proj-btn proj-btn-repo">🐙 GitHub Repo</a>
+      
         </div>
       </div>
     </div>
@@ -1090,10 +1219,25 @@ document.getElementById('ham').addEventListener('click',function(){
 /* REVEAL ON SCROLL */
 var obs=new IntersectionObserver(function(entries){
   entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('v')});
-},{threshold:.1});
+},{threshold:.02,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.reveal,.reveal-l').forEach(function(el){obs.observe(el)});
+/* Force-reveal hero elements immediately since they're above the fold */
+setTimeout(function(){
+  document.querySelectorAll('.hero .reveal, .hero .reveal-l').forEach(function(el){el.classList.add('v')});
+},100);
 
 /* COUNTER ANIMATION */
+/* Immediately set static values so stats never show raw 0 */
+(function(){
+  var s1=document.getElementById('s1'),s2=document.getElementById('s2'),
+      s3=document.getElementById('s3'),s4=document.getElementById('s4'),
+      s5=document.getElementById('s5');
+  if(s1)s1.innerHTML='3.65';
+  if(s5)s5.innerHTML='3.87';
+  if(s2)s2.innerHTML='6<sup>+</sup>';
+  if(s3)s3.innerHTML='85<sup>%</sup>';
+  if(s4)s4.innerHTML='3';
+})();
 function countTo(el,target,decimals,html_suffix,duration){
   if(!el||isNaN(target))return;
   var dur=duration||1200,steps=Math.round(dur/16),inc=target/steps,val=0;
@@ -1106,18 +1250,20 @@ function countTo(el,target,decimals,html_suffix,duration){
 }
 var sg=document.querySelector('.hero-stats-grid');
 if(sg){
+  var counterDone=false;
+  function runCounters(){
+    if(counterDone)return;counterDone=true;
+    setTimeout(function(){countTo(document.getElementById('s1'),3.65,2,'',1300)},200);
+    setTimeout(function(){countTo(document.getElementById('s5'),3.87,2,'',1100)},300);
+    setTimeout(function(){countTo(document.getElementById('s2'),6,0,'<sup>+</sup>',950)},350);
+    setTimeout(function(){countTo(document.getElementById('s3'),85,0,'<sup>%</sup>',1100)},500);
+    setTimeout(function(){countTo(document.getElementById('s4'),3,0,'',800)},650);
+  }
   var so=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        setTimeout(function(){countTo(document.getElementById('s1'),3.65,2,'',1300)},200);
-        setTimeout(function(){countTo(document.getElementById('s2'),5,0,'<sup>+</sup>',950)},350);
-        setTimeout(function(){countTo(document.getElementById('s3'),85,0,'<sup>%</sup>',1100)},500);
-        setTimeout(function(){countTo(document.getElementById('s4'),3,0,'',800)},650);
-        so.disconnect();
-      }
-    });
-  },{threshold:.4});
+    entries.forEach(function(e){if(e.isIntersecting){runCounters();so.disconnect();}});
+  },{threshold:0.05});
   so.observe(sg);
+  setTimeout(runCounters,700);
 }
 
 /* SKILL ACCORDION */
