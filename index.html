@@ -364,6 +364,59 @@ nav.scrolled{padding:14px 64px}
 @keyframes barGrow{from{width:0}to{width:var(--w,0%)}}
 
 /* ═══════════════════════════════════════════════════
+   AL-BAYAN — STREAMING VERSE CARD
+═══════════════════════════════════════════════════ */
+.ab-viz{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:16px 18px}
+.ab-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.ab-arabic{font-size:15px;color:var(--v3);text-align:right;line-height:1.6;margin-bottom:8px;direction:rtl}
+.ab-tafseer{font-size:11px;color:var(--muted);line-height:1.6}
+.ab-cursor{display:inline-block;width:6px;height:11px;background:var(--t1);margin-left:2px;animation:cursorBlink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+.ab-langs{display:flex;gap:6px;justify-content:center}
+.ab-lang{font-size:10px;padding:3px 9px;border-radius:100px;border:1px solid}
+.ab-lang.ar{background:rgba(124,109,250,.15);border-color:rgba(124,109,250,.3);color:var(--v2)}
+.ab-lang.en{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.3);color:var(--t1)}
+.ab-lang.ur{background:rgba(244,114,182,.12);border-color:rgba(244,114,182,.3);color:var(--p1)}
+
+/* ═══════════════════════════════════════════════════
+   PAKISTAN DASHBOARD — MINI ANIMATED CHART
+═══════════════════════════════════════════════════ */
+.pk-viz{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:18px}
+.pk-chart{display:flex;align-items:flex-end;gap:7px;height:76px;width:100%;max-width:220px}
+.pk-bar{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--v2),var(--v1));height:var(--h,20%);animation:pkGrow 1.1s cubic-bezier(.2,.8,.2,1) both}
+.pk-bar.hot{background:linear-gradient(180deg,var(--p1),#c2185b)}
+@keyframes pkGrow{from{height:0}to{height:var(--h,20%)}}
+.pk-caption{font-size:10px;color:var(--muted);letter-spacing:.05em}
+
+/* ═══════════════════════════════════════════════════
+   KARACHI WATTS — LIVE COUNTDOWN
+═══════════════════════════════════════════════════ */
+.kw-viz{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.kw-ring{width:74px;height:74px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--gold) 0deg 260deg,rgba(255,255,255,.06) 260deg 360deg);animation:kwSpin 6s linear infinite}
+@keyframes kwSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.kw-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--bg3)}
+.kw-ring-txt{position:relative;font-size:16px;z-index:1}
+.kw-caption{font-size:11px;color:var(--gold);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);padding:6px 14px;border-radius:8px;text-align:center}
+
+/* ═══════════════════════════════════════════════════
+   DELOITTE — ANIMATED BARS
+═══════════════════════════════════════════════════ */
+.delo-bar{width:20%;border-radius:3px 3px 0 0;height:var(--h,20%);animation:pkGrow 1.1s cubic-bezier(.2,.8,.2,1) both}
+
+/* ═══════════════════════════════════════════════════
+   TEAMTASKS — LIVE PULSE ON ACTIVE CARD
+═══════════════════════════════════════════════════ */
+.tt-pulse{width:6px;height:6px;border-radius:50%;background:var(--v2);display:inline-block;margin-left:4px;animation:blink 1.6s ease infinite}
+
+/* ═══════════════════════════════════════════════════
+   JIRA — PROGRESS FILL + CHECK POP
+═══════════════════════════════════════════════════ */
+.jira-fill{position:absolute;inset:0;border-radius:4px;transform-origin:left;animation:jiraFill 1.3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes jiraFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.jira-check{display:inline-block;animation:checkPop .5s cubic-bezier(.34,1.56,.64,1) both;animation-delay:1.2s}
+@keyframes checkPop{from{transform:scale(0)}to{transform:scale(1)}}
+
+/* ═══════════════════════════════════════════════════
    SKILLS
 ═══════════════════════════════════════════════════ */
 .skills-layout{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start}
@@ -614,7 +667,7 @@ footer{
       </div>
       <div class="h-stat">
         <div class="h-stat-num" id="s3">0<sup>%</sup></div>
-        <div class="h-stat-label">NLP Accuracy</div>
+        <div class="h-stat-label">CNN Sensitivity</div>
       </div>
       <div class="h-stat">
         <div class="h-stat-num" id="s4">0</div>
@@ -728,7 +781,7 @@ footer{
       <div class="proj-body-wrap">
         <span class="proj-tag">Deep Learning · Healthcare · CNN</span>
         <h3 class="proj-title">Chest X-Ray Pneumonia Classifier</h3>
-        <p class="proj-desc">CNN model with temporal analysis for pneumonia detection from chest X-rays. Side-by-side comparison interface shows Normal vs Pneumonia with confidence scores. Deployed end-to-end via Streamlit for clinical use.</p>
+        <p class="proj-desc">Designed and evaluated 3 CNN architectures (Baseline, Deep+L2, Residual) for pneumonia classification on a synthetic RSNA-inspired X-ray dataset. Best model achieved <strong style="color:var(--t1)">90% accuracy, 0.95 AUC-ROC, 93% sensitivity</strong>, with temporal analysis confirming stable performance across weekly batches. Deployed via Streamlit.</p>
         <div class="proj-chips">
           <span class="proj-chip">TensorFlow</span>
           <span class="proj-chip">CNN</span>
@@ -737,20 +790,24 @@ footer{
           <span class="proj-chip pink">Medical Imaging</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/maryamsohail32/ChestXRay-CNN-Temporal-Analysis " target="_blank" class="proj-btn proj-btn-repo">🐙 GitHub Repo</a>
+          <a href="https://github.com/maryamsohail32/ChestXRay-CNN-Temporal-Analysis" target="_blank" class="proj-btn proj-btn-repo">🐙 GitHub Repo</a>
+          <a href="https://chestxray-cnn-temporal-analysis-msa.streamlit.app/" target="_blank" class="proj-btn proj-btn-demo">▶ Live Demo</a>
         </div>
       </div>
     </div>
 
     <!-- Al-Bayan -->
     <div class="proj-card reveal d1">
-      <div class="proj-visual" style="background:linear-gradient(135deg,rgba(124,109,250,.18),rgba(52,211,153,.12))">
-        <div style="text-align:center">
-          <div style="font-size:42px;margin-bottom:6px">📖</div>
-          <div style="display:flex;gap:6px;justify-content:center">
-            <span style="font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(124,109,250,.2);border:1px solid rgba(124,109,250,.3);color:var(--v2)">العربية</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);color:var(--t1)">English</span>
-            <span style="font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.3);color:var(--p1)">اردو</span>
+      <div class="proj-visual" style="padding:0">
+        <div class="ab-viz">
+          <div class="ab-card">
+            <div class="ab-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="ab-tafseer">In the name of Allah, the Most Gracious, the Most Merciful<span class="ab-cursor"></span></div>
+          </div>
+          <div class="ab-langs">
+            <span class="ab-lang ar">العربية</span>
+            <span class="ab-lang en">English</span>
+            <span class="ab-lang ur">اردو</span>
           </div>
         </div>
         <span class="proj-visual-label">Deployed</span>
@@ -758,7 +815,7 @@ footer{
       <div class="proj-body-wrap">
         <span class="proj-tag">NLP · Full-Stack · Multilingual</span>
         <h3 class="proj-title">Al-Bayan — Quranic AI Companion</h3>
-        <p class="proj-desc">Multilingual Quranic study app in Arabic, English & Urdu. AI tafseer chatbot, verse browser, and Groq-powered LLM backend. Deployed with Flask + React.</p>
+        <p class="proj-desc">Full-stack Quranic study app (React, Flask, SQLite) with real-time streaming AI chat (Groq/LLaMA 3.3 70B) for bilingual tafseer grounded in classical sources (Ibn Kathir, Ma'ariful Quran). Includes AI-powered thematic verse discovery across all 6,236 ayaat and bookmarking.</p>
         <div class="proj-chips">
           <span class="proj-chip pink">Groq API</span>
           <span class="proj-chip">Flask</span>
@@ -774,25 +831,32 @@ footer{
 
     <!-- Sentiment Analyzer -->
     <div class="proj-card reveal d2">
-      <div class="proj-visual" style="background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(110,231,183,.06))">
-        <div style="text-align:center">
-          <div style="font-size:40px;margin-bottom:8px">💬</div>
-          <div style="display:flex;gap:6px;justify-content:center">
-            <span style="font-size:11px;padding:4px 10px;border-radius:100px;background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);color:var(--t1)">😊 Positive</span>
-            <span style="font-size:11px;padding:4px 10px;border-radius:100px;background:rgba(244,114,182,.1);border:1px solid rgba(244,114,182,.25);color:var(--p1)">😠 Negative</span>
+      <div class="proj-visual" style="padding:0">
+        <div class="cnn-comparison">
+          <div class="cnn-pane normal">
+            <div class="cnn-xray normal-xray" style="font-size:28px">😊</div>
+            <span class="cnn-label green">Positive</span>
+            <span class="cnn-conf">Confidence: 88%</span>
+            <div class="cnn-bar"><div class="cnn-bar-fill" style="--w:88%;background:var(--t1)"></div></div>
           </div>
-          <div style="margin-top:8px;font-size:11px;color:var(--muted)">Accuracy: <strong style="color:var(--t1)">85%+</strong></div>
+          <div style="width:1px;background:var(--border)"></div>
+          <div class="cnn-pane pneumonia">
+            <div class="cnn-xray pneumo-xray" style="font-size:28px">😠</div>
+            <span class="cnn-label red">Negative</span>
+            <span class="cnn-conf">Confidence: 76%</span>
+            <div class="cnn-bar"><div class="cnn-bar-fill" style="--w:76%;background:var(--p1)"></div></div>
+          </div>
         </div>
         <span class="proj-visual-label">Deployed</span>
       </div>
       <div class="proj-body-wrap">
-        <span class="proj-tag">NLP · Classification</span>
+        <span class="proj-tag">NLP · Transformers · Testing</span>
         <h3 class="proj-title">Sentiment Analyzer</h3>
-        <p class="proj-desc">NLP pipeline achieving 85%+ accuracy on real-world text. Scikit-learn classification with full preprocessing and feature engineering pipeline.</p>
+        <p class="proj-desc">Real-time sentiment analyzer using a fine-tuned DistilBERT transformer (HuggingFace/PyTorch; ~91% accuracy on the SST-2 benchmark), with a confidence-threshold system for reliable 3-class (Positive/Negative/Neutral) output and a full pytest test suite for core utilities.</p>
         <div class="proj-chips">
-          <span class="proj-chip teal">Scikit-learn</span>
-          <span class="proj-chip">NLP</span>
-          <span class="proj-chip">Python</span>
+          <span class="proj-chip teal">DistilBERT</span>
+          <span class="proj-chip">PyTorch</span>
+          <span class="proj-chip">Pytest</span>
         </div>
         <div class="proj-links">
           <a href="https://github.com/maryamsohail32/sentiment-analyzer" target="_blank" class="proj-btn proj-btn-repo">🐙 GitHub Repo</a>
@@ -801,21 +865,51 @@ footer{
       </div>
     </div>
 
+    <!-- Pakistan Socioeconomic Dashboard -->
+    <div class="proj-card reveal d3">
+      <div class="proj-visual" style="padding:0">
+        <div class="pk-viz">
+          <div class="pk-chart">
+            <div class="pk-bar" style="--h:24%"></div>
+            <div class="pk-bar" style="--h:32%"></div>
+            <div class="pk-bar" style="--h:44%"></div>
+            <div class="pk-bar" style="--h:58%"></div>
+            <div class="pk-bar hot" style="--h:98%"></div>
+            <div class="pk-bar" style="--h:80%"></div>
+          </div>
+          <div class="pk-caption">Inflation Rate 2019 → 2024</div>
+        </div>
+        <span class="proj-visual-label">Deployed</span>
+      </div>
+      <div class="proj-body-wrap">
+        <span class="proj-tag">Data Visualization · Streamlit</span>
+        <h3 class="proj-title">Pakistan Socioeconomic Dashboard</h3>
+        <p class="proj-desc">Interactive Streamlit dashboard analyzing Pakistan's socioeconomic indicators (2019–2024) — inflation, unemployment, GDP, PKR/USD, city-level data — with dynamic year-range and multi-city filtering. Data compiled from SBP, PBS, and World Bank/IMF sources.</p>
+        <div class="proj-chips">
+          <span class="proj-chip teal">Streamlit</span>
+          <span class="proj-chip">Pandas</span>
+          <span class="proj-chip">Matplotlib</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://github.com/maryamsohail32/pakistan-socioeconmic-dashboard" target="_blank" class="proj-btn proj-btn-repo">🐙 GitHub Repo</a>
+          <a href="https://pakistan-socioeconmic-dashboard-msa.streamlit.app/" target="_blank" class="proj-btn proj-btn-demo">▶ Live Demo</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Karachi Watts -->
     <div class="proj-card reveal d3">
-      <div class="proj-visual" style="background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(251,191,36,.04))">
-        <div style="text-align:center">
-          <div style="font-size:42px;margin-bottom:8px">⚡</div>
-          <div style="font-size:12px;color:var(--gold);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);padding:6px 14px;border-radius:8px;max-width:180px;margin:0 auto">
-            Next outage: <strong>6:00 PM – 4hrs</strong>
-          </div>
+      <div class="proj-visual" style="padding:0">
+        <div class="kw-viz">
+          <div class="kw-ring"><span class="kw-ring-txt">⚡</span></div>
+          <div class="kw-caption">Next outage: <strong>6:00 PM – 4hrs</strong></div>
         </div>
         <span class="proj-visual-label">Personal Project</span>
       </div>
       <div class="proj-body-wrap">
         <span class="proj-tag">AI · Civic Tech · Chatbot</span>
         <h3 class="proj-title">Karachi Watts</h3>
-        <p class="proj-desc">AI chatbot predicting Karachi load-shedding durations using ML models on historical grid data. Helps families plan daily routines around outages.</p>
+        <p class="proj-desc">Compared 3 regression models (Linear, Gradient Boosting, Random Forest) for outage-duration prediction; selected Random Forest as best performer (<strong style="color:var(--gold)">R²=0.991, MAE=0.26h</strong>). Integrated into a Groq-powered (LLaMA 3.3) chatbot and Streamlit dashboard.</p>
         <div class="proj-chips">
           <span class="proj-chip">Python</span>
           <span class="proj-chip teal">ML</span>
@@ -833,10 +927,10 @@ footer{
       <div class="proj-visual" style="background:linear-gradient(135deg,rgba(124,109,250,.12),rgba(167,139,250,.06));flex-direction:column;gap:8px;padding:16px">
         <div style="width:100%;background:rgba(255,255,255,.04);border-radius:6px;overflow:hidden;border:1px solid var(--border)">
           <div style="display:flex;align-items:flex-end;gap:4px;padding:10px 12px;height:70px">
-            <div style="width:20%;background:rgba(124,109,250,.7);border-radius:3px 3px 0 0;height:85%"></div>
-            <div style="width:20%;background:rgba(124,109,250,.4);border-radius:3px 3px 0 0;height:45%"></div>
-            <div style="width:20%;background:rgba(52,211,153,.7);border-radius:3px 3px 0 0;height:95%"></div>
-            <div style="width:20%;background:rgba(244,114,182,.7);border-radius:3px 3px 0 0;height:60%"></div>
+            <div class="delo-bar" style="--h:85%;background:rgba(124,109,250,.7)"></div>
+            <div class="delo-bar" style="--h:45%;background:rgba(124,109,250,.4);animation-delay:.1s"></div>
+            <div class="delo-bar" style="--h:95%;background:rgba(52,211,153,.7);animation-delay:.2s"></div>
+            <div class="delo-bar" style="--h:60%;background:rgba(244,114,182,.7);animation-delay:.3s"></div>
           </div>
         </div>
         <div style="font-size:10px;color:var(--muted)">Data Analytics & Telemetry Framework</div>
@@ -883,7 +977,7 @@ footer{
             </div>
             <!-- In Progress -->
             <div style="flex:1;display:flex;flex-direction:column;gap:5px">
-              <div style="font-size:8px;color:var(--dim);letter-spacing:.1em;margin-bottom:2px">IN PROGRESS</div>
+              <div style="font-size:8px;color:var(--dim);letter-spacing:.1em;margin-bottom:2px">IN PROGRESS<span class="tt-pulse"></span></div>
               <div style="background:rgba(124,109,250,.1);border:1px solid rgba(124,109,250,.25);border-radius:5px;padding:5px 7px">
                 <div style="font-size:8px;color:var(--v2)">Auth flow</div>
                 <div style="font-size:7px;color:var(--dim);margin-top:2px">
@@ -913,7 +1007,7 @@ footer{
       <div class="proj-body-wrap">
         <span class="proj-tag">Full-Stack · Laravel · Team Collaboration</span>
         <h3 class="proj-title">TeamTasks</h3>
-        <p class="proj-desc">Collaborative task manager built with Laravel 11. Teams can be created, members invited by email, and tasks tracked across a Kanban board with role-based access, priority flags, and overdue highlighting.</p>
+        <p class="proj-desc">Full-stack team task manager (Laravel 11, PHP 8.3, MySQL) with a Kanban board, email-based team invitations, and role-based authorization implemented via Laravel Policies (Owner/Member permission tiers); includes a PHPUnit test suite.</p>
         <div class="proj-chips">
           <span class="proj-chip pink">Laravel 11</span>
           <span class="proj-chip">PHP 8.3</span>
@@ -935,19 +1029,25 @@ footer{
           <div style="display:flex;gap:6px">
             <div style="flex:1">
               <div style="font-size:9px;color:var(--dim);margin-bottom:4px">TODO</div>
-              <div style="background:rgba(255,255,255,.05);border-radius:4px;height:24px;border:1px solid var(--border)"></div>
+              <div style="position:relative;background:rgba(255,255,255,.05);border-radius:4px;height:24px;border:1px solid var(--border);overflow:hidden">
+                <div class="jira-fill" style="background:rgba(255,255,255,.06)"></div>
+              </div>
             </div>
             <div style="flex:1">
               <div style="font-size:9px;color:var(--dim);margin-bottom:4px">IN PROGRESS</div>
-              <div style="background:rgba(124,109,250,.1);border-radius:4px;height:24px;border:1px solid rgba(124,109,250,.2)"></div>
+              <div style="position:relative;background:rgba(124,109,250,.1);border-radius:4px;height:24px;border:1px solid rgba(124,109,250,.2);overflow:hidden">
+                <div class="jira-fill" style="background:rgba(124,109,250,.15);animation-delay:.15s"></div>
+              </div>
             </div>
             <div style="flex:1">
               <div style="font-size:9px;color:var(--dim);margin-bottom:4px">DONE</div>
-              <div style="background:rgba(52,211,153,.1);border-radius:4px;height:24px;border:1px solid rgba(52,211,153,.2)"></div>
+              <div style="position:relative;background:rgba(52,211,153,.1);border-radius:4px;height:24px;border:1px solid rgba(52,211,153,.2);overflow:hidden">
+                <div class="jira-fill" style="background:rgba(52,211,153,.2);animation-delay:.3s"></div>
+              </div>
             </div>
           </div>
         </div>
-        <div style="font-size:10px;color:var(--t1)">✓ 8/8 Tests Passing</div>
+        <div style="font-size:10px;color:var(--t1)"><span class="jira-check">✓</span> 8/8 Tests Passing</div>
         <span class="proj-visual-label">Agile</span>
       </div>
       <div class="proj-body-wrap">
@@ -1147,11 +1247,11 @@ footer{
         <a href="tel:+923343482251" class="c-link">
           <div class="c-icon">📞</div>+92 334 348 2251
         </a>
-        <a href="linkedin.com/in/maryam-sohail-ahmed-685524341 " target="_blank" class="c-link">
-          <div class="c-icon">💼</div>linkedin.com/in/maryamsohailahmed
+        <a href="https://www.linkedin.com/in/maryam-sohail-ahmed-685524341/" target="_blank" class="c-link">
+          <div class="c-icon">💼</div>linkedin.com/in/maryam-sohail-ahmed-685524341
         </a>
         <a href="https://github.com/maryamsohail32" target="_blank" class="c-link">
-          <div class="c-icon">🐙</div>github.com/maryamsohailahmed
+          <div class="c-icon">🐙</div>github.com/maryamsohail32
         </a>
         <a href="Maryam Sohail  CV.pdf" download class="c-link" style="color:var(--gold)">
           <div class="c-icon" style="background:rgba(251,191,36,.1);border-color:rgba(251,191,36,.3)">↓</div>Download Resume (PDF)
@@ -1237,7 +1337,7 @@ setTimeout(function(){
   if(s1)s1.innerHTML='3.69';
   if(s5)s5.innerHTML='3.77';
   if(s2)s2.innerHTML='6<sup>+</sup>';
-  if(s3)s3.innerHTML='85<sup>%</sup>';
+  if(s3)s3.innerHTML='93<sup>%</sup>';
   if(s4)s4.innerHTML='4';
 })();
 function countTo(el,target,decimals,html_suffix,duration){
@@ -1258,7 +1358,7 @@ if(sg){
     setTimeout(function(){countTo(document.getElementById('s1'),3.69,2,'',1300)},200);
     setTimeout(function(){countTo(document.getElementById('s5'),3.77,2,'',1100)},300);
     setTimeout(function(){countTo(document.getElementById('s2'),6,0,'<sup>+</sup>',950)},350);
-    setTimeout(function(){countTo(document.getElementById('s3'),85,0,'<sup>%</sup>',1100)},500);
+    setTimeout(function(){countTo(document.getElementById('s3'),93,0,'<sup>%</sup>',1100)},500);
     setTimeout(function(){countTo(document.getElementById('s4'),4,0,'',650)},650);
   }
   var so=new IntersectionObserver(function(entries){
